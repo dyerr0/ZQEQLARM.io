@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-left">CONTEC Tabasco</div>
+            <h1 class="slide-in">PROGRAMAS</h1>
+            <div class="header-right">
+                <button id="backupButton">Respaldo</button>
+                <button id="restoreButton">Restaurar</button>
+                <input type="file" id="restoreInput" accept="application/json" style="display: none;">
+                <div id="currentDate"></div>
+                <div id="currentTime"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content fade-in">
+        <div class="left-column">
+            <section class="add-alarm">
+                <h2>Agregar Alarma</h2>
+                <form id="alarmForm">
+                    <div class="form-group">
+                        <label for="timeInput">Hora:</label>
+                        <input type="time" id="timeInput" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Días de la Semana:</label>
+                        <div class="weekdays">
+                            <input type="checkbox" id="day1" value="1">
+                            <label for="day1">Lunes</label>
+
+                            <input type="checkbox" id="day2" value="2">
+                            <label for="day2">Martes</label>
+
+                            <input type="checkbox" id="day3" value="3">
+                            <label for="day3">Miércoles</label>
+
+                            <input type="checkbox" id="day4" value="4">
+                            <label for="day4">Jueves</label>
+
+                            <input type="checkbox" id="day5" value="5">
+                            <label for="day5">Viernes</label>
+
+                            <input type="checkbox" id="day6" value="6">
+                            <label for="day6">Sábado</label>
+
+                            <input type="checkbox" id="day0" value="0">
+                            <label for="day0" style="margin-left: -0.8vw;">Domingo</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="audio">Seleccionar Audio:</label>
+                        <div class="audio-buttons">
+                            <button type="button" onclick="selectAudio('LINEA 1', this)">LINEA 1</button>
+                            <button type="button" onclick="selectAudio('LINEA 4A,5A,8', this)">LINEA 4A,5A,8</button>
+                            <button type="button" onclick="selectAudio('LINEA 2,5,6,7', this)">LINEA 2,5,6,7</button>
+                            <button type="button" onclick="selectAudio('LINEA 2A,3,4,9', this)">LINEA 2A,3,4,9</button>
+                        </div>
+                        <input type="hidden" id="audio" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="volumeInput">Volumen:</label>
+                        <input type="range" id="volumeInput" min="0" max="1" step="0.01" value="1">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Agregar Alarma</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="right-column">
+            <h2>Alarmas Guardadas</h2>
+            <table id="alarmsTable" class="fade-in">
+                <thead>
+                    <tr>
+                        <th>Activa</th>
+                        <th>Hora</th>
+                        <th>Días</th>
+                        <th>Audio</th>
+                        <th>Volumen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="alarmsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="alarmModal" class="modal">
+        <div class="modal-content">
+            <h2>Hora del programa</h2>
+            <p id="alarmAudioName"></p>
+            <button id="stopAlarmButton" onclick="stopAlarm()">Detener</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

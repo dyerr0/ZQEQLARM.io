@@ -1,0 +1,643 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+:root {
+    --primary-color: #a12d2d96; /* Rojo del header */
+    --secondary-color: #212121;
+    --accent-color: rgb(202 135 135);
+    --text-color: #ffffff;
+    --button-color: #3a3a3a;
+    --button-hover: #4a4a4a;
+    --border-color: #3a3a3a;
+    --input-background: #2e2e2e;
+    --table-width: 50%;
+}
+
+
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    padding: 1.5vw 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+}
+
+header h1 {
+    margin: 0;
+    margin-left: 15vw;
+    font-size: 2.5vw;
+    color: var(--text-color);
+}
+
+.slide-in {
+    animation: slideIn 1s ease-out forwards;]
+    s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.header-left {
+    font-size: 1.4vw;
+    margin-left: -8vw;
+    color: var(--text-color);
+    opacity: 0;
+    animation: fadeInLeft 1s forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInLeft {
+    from {
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.header-right {
+    display: flex;
+    margin-right: -8vw;
+    align-items: center;
+    color: var(--text-color);
+    opacity: 0;
+    animation: fadeInRight 1s forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInRight {
+    from {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#currentDate,
+#currentTime {
+    margin-left: 1vw;
+    font-size: 1.2vw;
+}
+
+#backupButton,
+#restoreButton {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5vw 1vw;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    margin-left: 0.5vw;
+    font-size: 1vw;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#backupButton:hover,
+#restoreButton:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.05);
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+    min-height: calc(100% - (1.5vw * 2));
+    flex-wrap: wrap;
+    opacity: 0;
+}
+
+.main-content.fade-in {
+    animation: contentFadeIn 1s forwards;
+    animation-delay: 1s;
+}
+
+@keyframes contentFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Columnas */
+.left-column,
+.right-column {
+    width: 50%;
+    padding: 1vw;
+    box-sizing: border-box;
+}
+
+.left-column {
+    padding-right: 2vw;
+}
+
+.right-column {
+    padding-left: 2vw;
+}
+
+.add-alarm h2 {
+    font-size: 2vw;
+    color: var(--accent-color);
+    margin-bottom: 1vw;
+    position: relative;
+    animation: underline 1s forwards;
+}
+
+@keyframes underline {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.add-alarm h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5vw;
+    height: 0.3vw;
+    width: 0;
+    background-color: var(--accent-color);
+    animation: underline 1s forwards;
+    animation-delay: 0.5s;
+}
+
+form {
+    background-color: var(--secondary-color);
+    padding: 1.5vw;
+    border-radius: 0.5vw;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: formFadeIn 1s forwards;
+    animation-delay: 1.2s;
+    opacity: 0;
+}
+
+@keyframes formFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5vw;
+    position: relative;
+}
+
+label {
+    font-size: 1.2vw;
+    margin-bottom: 0.5vw;
+    display: block;
+}
+
+.weekdays {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.weekdays input[type="checkbox"] {
+    display: none;
+}
+
+.weekdays label {
+    position: relative;
+    padding-left: 2.5vw;
+    cursor: pointer;
+    margin-right: 2vw;
+    margin-bottom: 1.5vw;
+    font-size: 1.2vw;
+}
+
+.weekdays label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 2px solid var(--border-color);
+    border-radius: 0.2vw;
+    background-color: var(--input-background);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.weekdays input[type="checkbox"]:checked + label::before {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.weekdays label:hover::before {
+    border-color: var(--accent-color);
+}
+
+.weekdays input[type="checkbox"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 0.4vw;
+    top: 0.3vw;
+    width: 0.5vw;
+    height: 1vw;
+    border: solid var(--text-color);
+    border-width: 0 0.2vw 0.2vw 0;
+    transform: rotate(45deg);
+}
+
+.form-group input[type="time"] {
+    width: 100%;
+    padding: 0.8vw;
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5vw;
+    color: var(--text-color);
+    font-size: 1.2vw;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input[type="time"]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+    outline: none;
+}
+
+.form-group label[for="volumeInput"] {
+    display: block;
+    margin-bottom: 0.5vw;
+}
+
+#volumeInput {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 0.5vw;
+    background: var(--input-background);
+    border-radius: 0.25vw;
+    outline: none;
+    transition: background 0.3s;
+}
+
+#volumeInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.2vw;
+    height: 1.2vw;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#volumeInput::-webkit-slider-thumb:hover {
+    background: #e74c3c;
+    transform: scale(1.1);
+}
+
+#volumeInput::-moz-range-thumb {
+    width: 1.2vw;
+    height: 1.2vw;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#volumeInput::-moz-range-thumb:hover {
+    background: #e74c3c;
+    transform: scale(1.1);
+}
+
+.audio-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 1vw;
+    gap: 0.5vw;
+}
+
+.audio-buttons button {
+    flex: 1 1 calc(33.333% - 0.5vw);
+    padding: 0.8vw;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1.2vw;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.audio-buttons button.selected {
+    background-color: var(--accent-color);
+}
+
+.audio-buttons button:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.8vw;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1.5vw;
+    margin-top: 1vw;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #ff2e2e;
+    transform: scale(1.05);
+}
+
+.right-column h2 {
+    font-size: 2vw;
+    color: var(--accent-color);
+    margin-bottom: 1vw;
+    position: relative;
+}
+
+.right-column h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5vw;
+    height: 0.3vw;
+    width: 0;
+    background-color: var(--accent-color);
+    animation: underline 1s forwards;
+    animation-delay: 1s;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-color);
+    border-radius: 0.5vw;
+    overflow: hidden;
+    opacity: 0;
+    animation: tableFadeIn 1s forwards;
+    animation-delay: 1.5s;
+}
+
+@keyframes tableFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+table th,
+table td {
+    padding: 0.8vw;
+    text-align: center;
+    font-size: 1.2vw;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+    background-color: var(--button-color);
+    font-weight: 500;
+}
+
+table tr {
+    transition: background-color 0.3s;
+}
+
+table tr:hover {
+    background-color: #333333;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+.delete-btn {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5vw 1vw;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1.2vw;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #ff2e2e;
+    transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(18, 18, 18, 0.95);
+    opacity: 0;
+    animation: modalFadeIn 0.5s forwards;
+}
+
+@keyframes modalFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #1E1E1E;
+    margin: 5% auto;
+    padding: 2vw;
+    border: 0.1vw solid #3a3a3a;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    text-align: center;
+    border-radius: 0.5vw;
+    animation: contentScaleIn 0.5s forwards;
+}
+
+@keyframes contentScaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#alarmModal .modal-content {
+    background-color: #1E1E1E;
+    margin: 15% auto;
+    padding: 2vw;
+    border: 0.1vw solid #3a3a3a;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    border-radius: 0.5vw;
+    animation: contentScaleIn 0.5s forwards;
+}
+
+#alarmModal h2 {
+    font-size: 2vw;
+    color: var(--accent-color);
+}
+
+#alarmModal p {
+    font-size: 1.5vw;
+    margin: 1vw 0;
+}
+
+#stopAlarmButton {
+    background-color: #ff2e2e;
+    color: #ffffff;
+    padding: 1vw 2vw;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#stopAlarmButton:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Animaciones adicionales */
+.fade-in-row {
+    animation: fadeInRow 0.5s forwards;
+}
+
+@keyframes fadeInRow {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { background-color: rgba(255, 82, 82, 0.9); }
+    50% { background-color: rgba(255, 82, 82, 0.5); }
+}
+
+.modal-content.blink {
+    animation: blink 1s infinite;
+}
+
+@media (max-width: 768px) {
+    .left-column,
+    .right-column {
+        width: 100%;
+        padding: 1vw 0;
+    }
+
+    header h1 {
+        font-size: 4vw;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .header-left,
+    .header-right {
+        margin-top: 1vw;
+        opacity: 1;
+        transform: none;
+    }
+
+    #backupButton,
+    #restoreButton,
+    #currentDate,
+    #currentTime {
+        font-size: 3vw;
+        margin: 0.5vw 0;
+    }
+
+    .audio-buttons button {
+        flex: 1 1 100%;
+    }
+
+    .modal-content h2 {
+        font-size: 3vw;
+    }
+
+    .modal-content p {
+        font-size: 2vw;
+    }
+
+    #stopAlarmButton,
+    #confirmResetButton {
+        font-size: 2vw;
+        padding: 1.5vw 3vw;
+    }
+
+    #volumeInput {
+        height: 0.8vw;
+    }
+}
